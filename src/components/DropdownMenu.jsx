@@ -52,7 +52,7 @@ export default function DropdownMenu() {
           </Menu.TogglerItem>
 
           <Menu.LinkItem
-            href={`https://github.com/giraldi07/quickchat/${APP_NAME}/issues`}
+            href={`https://github.com/giraldi07/${APP_NAME}/issues`}
           >
             <RiBugLine />
             <div>Report Bug</div>
