@@ -1,5 +1,5 @@
 // Chage the production/local URL according to the environment
-export const REDIRECT_URL_LOCAL = "http://localhost:3000";
+export const REDIRECT_URL_LOCAL = "https://quickchat-theta.vercel.app";
 export const REDIRECT_URL_PRODUCTION = "https://quickchat-theta.vercel.app";
 
 export const getRedirectUrl = () => {
