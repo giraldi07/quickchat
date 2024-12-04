@@ -4,9 +4,9 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 3000,
-    host: "0.0.0.0",
-    open: false,
+  define: {
+    "process.env": process.env,
+    VITE_SUPABASE_URL: process.env.VITE_SUPABASE_URL,
+    VITE_SUPABASE_KEY: process.env.VITE_SUPABASE_KEY,
   },
 });
