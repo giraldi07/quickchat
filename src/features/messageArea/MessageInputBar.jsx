@@ -5,6 +5,7 @@ import { useSendNewMessage } from "./useSendNewMessage";
 import { v4 as uuid } from "uuid";
 import Loader from "../../components/Loader";
 import useConvInfo from "./useConvInfo";
+import EmojiPicker from '../../components/EmojiPicker';
 
 function MessageInputBar() {
   const {
@@ -20,6 +21,15 @@ function MessageInputBar() {
   const friendUserId = convInfo?.friendInfo?.id;
   const myUserId = user?.id;
   const inputRef = useRef(null);
+
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false); // State to toggle emoji picker visibility
+
+  // Handle emoji selection from EmojiPicker
+  const handleEmojiSelect = (emoji) => {
+    if (emoji) {
+      setNewMessage((prevMessage) => prevMessage + emoji); // Append the emoji to the message
+    }
+  };
 
   function handleSendNewMessage(e) {
     e.preventDefault();
@@ -53,7 +63,7 @@ function MessageInputBar() {
 
   return (
     <div className="px-4 py-2">
-      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto] overflow-hidden rounded-full border border-transparent bg-bgPrimary shadow-lg dark:border-LightShade/20 dark:bg-LightShade/20">
+      <form className="mx-auto grid max-w-3xl grid-cols-[1fr_auto_auto] gap-2 overflow-hidden rounded-full border border-transparent bg-bgPrimary shadow-lg dark:border-LightShade/20 dark:bg-LightShade/20">
         <label htmlFor="inputMessage" className="sr-only" />
         <input
           disabled={isPendingConvInfo}
@@ -67,6 +77,16 @@ function MessageInputBar() {
           autoComplete="off"
         />
 
+        {/* Emoji Button next to the input field */}
+        <button
+          type="button"
+          onClick={() => setShowEmojiPicker((prev) => !prev)}
+          className="m flex items-center justify-center rounded-full p-2 text-2xl"
+        >
+          😊
+        </button>
+
+        {/* Send Button next to the emoji button */}
         <button
           className={`m-1 flex h-10 w-10 items-center justify-center rounded-full bg-bgAccent text-2xl text-textPrimary-dark hover:bg-bgAccentDim active:scale-95 disabled:opacity-70 dark:bg-bgAccent-dark dark:hover:bg-bgAccentDim-dark`}
           disabled={isSending || isPendingConvInfo}
@@ -80,6 +100,14 @@ function MessageInputBar() {
           )}
         </button>
       </form>
+
+      {/* Show Emoji Picker below the input if visible */}
+      {showEmojiPicker && (
+        <div className="absolute z-10 bottom-16 left-1/3 w-full max-w-xs mt-2 px-2 py-1 rounded-lg shadow-lg dark:text-white transition-transform transform duration-300 ease-out opacity-0 animate-slide-up-fade-in">
+          <EmojiPicker onEmojiSelect={handleEmojiSelect} />
+        </div>
+      )}
+
     </div>
   );
 }

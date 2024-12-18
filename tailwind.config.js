@@ -79,6 +79,22 @@ export default {
       minWidth: {
         "screen-safe": ["100vw", "100dvw", "100svw"],
       },
+
+      // Menambahkan animasi custom
+      animation: {
+        'slide-up-fade-in': 'slideUpFadeIn 0.3s ease-out forwards',
+        'slide-up-fade-out': 'slideUpFadeOut 0.3s ease-in forwards', // Animasi untuk keluar
+      },
+      keyframes: {
+        slideUpFadeIn: {
+          '0%': { transform: 'translateY(10px)', opacity: 0 },
+          '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+        slideUpFadeOut: {
+          '0%': { transform: 'translateY(0)', opacity: 1 },
+          '100%': { transform: 'translateY(-10px)', opacity: 0 },
+        },
+      },
     },
   },
   plugins: [],
