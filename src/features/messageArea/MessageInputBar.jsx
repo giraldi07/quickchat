@@ -31,6 +31,11 @@ function MessageInputBar() {
     }
   };
 
+  // Handle closing the emoji picker
+  const handleCloseEmojiPicker = () => {
+    setShowEmojiPicker(false); // Hide emoji picker
+  };
+
   function handleSendNewMessage(e) {
     e.preventDefault();
     inputRef.current.focus();
@@ -103,11 +108,10 @@ function MessageInputBar() {
 
       {/* Show Emoji Picker below the input if visible */}
       {showEmojiPicker && (
-        <div className="absolute z-10 bottom-16 left-1/3 w-full max-w-xs mt-2 px-2 py-1 rounded-lg shadow-lg dark:text-white transition-transform transform duration-300 ease-out opacity-0 animate-slide-up-fade-in">
-          <EmojiPicker onEmojiSelect={handleEmojiSelect} />
+        <div className="absolute z-10 bottom-16 left-6 w-auto max-w-xs mt-2 px-2 py-1 rounded-lg shadow-lg dark:text-white transition-transform transform duration-300 ease-out opacity-0 animate-slide-up-fade-in">
+          <EmojiPicker onEmojiSelect={handleEmojiSelect} onClose={handleCloseEmojiPicker} />
         </div>
       )}
-
     </div>
   );
 }
